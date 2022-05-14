@@ -8,5 +8,10 @@ A demonstration project for the course Advanced_Programming_Techniques_2022
 3) In a different directory (or the same) add the example.py and the videocensor.py , pip install all the dependencies (for now) and open the example.py .
 You are set to go, dependencies are : 
 Python 3.7+
-
-
+uvicorn
+fastapi
+opencv-python
+numpy
+pytesseract
+difflib
+requests
