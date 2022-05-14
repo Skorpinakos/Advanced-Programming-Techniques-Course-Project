@@ -8,73 +8,8 @@ from difflib import SequenceMatcher
 
 import detect
 
-
-#################################################################### DEF #######################################################
-def similar(a, b):
-    return SequenceMatcher(None, a, b).ratio()
-
-
-
-
-def split(frame_seq,total_frames,check_intervals,cap,mode='file'):
-  images_after_split=[]
-  while(True):
-    if frame_seq<total_frames-1:
-      
-
-      #The first argument of cap.set(), number 2 defines that parameter for setting the frame selection.
-      #Number 2 defines flag CV_CAP_PROP_POS_FRAMES which is a 0-based index of the frame to be decoded/captured next.
-      #The second argument defines the frame number in range 0.0-1.0
-
-
-      cap.set(1,frame_seq);
-
-      #Read the next frame from the video. If you set frame 749 above then the code will return the last frame.
-      ret, frame = cap.read()
-      if frame_seq==0:
-        images_after_split.append(frame)
-
-
-      #Store this frame to an image
-      #
-      if mode!='file':
-        images_after_split.append(frame)
-      else:
-        cv2.imwrite('store_photos_after_split/_frame_'+str(frame_seq)+'.jpg',frame)
-
-
-      #frame_list.append(frame) #<-it was about ram and ssd utilization
-      #increase counter by one interval 
-      frame_seq = check_intervals+frame_seq
-    else:
-      break
-  
-  return images_after_split
-
-
-
-
-
-def compose_video(edited_images,video_name,fps,total_frames,check_intervals,mode='file'):
-
-  if mode=='file':
-    first_frame=cv2.imread("store_photos_out/_frame_0.jpg")
-  else:
-    first_frame=edited_images[0]
-  height,width,layers=first_frame.shape
-  video=cv2.VideoWriter('store_output_video/{}.mp4'.format(video_name.split("/")[-1]),-1,fps,(width,height))
-
-  #for i in range(0,int(total_frames)-1):
-    #for j in range(0,check_intervals):
-      #video.write(cv2.imread("store_photos_out/_frame_{}.jpg".format(i)))
-
-
-  for i in range(0,int(total_frames/check_intervals)-1):
-    for j in range(0,check_intervals):
-      video.write(edited_images[i])
-
-  cv2.destroyAllWindows()
-  video.release()
+import compose 
+import split
 
 #################################################################### DEF #######################################################
 
@@ -101,7 +36,7 @@ total_frames=cap.get(cv2.CAP_PROP_FRAME_COUNT)
 time_length =total_frames/fps
 #frame_list=[]
 
-images_after_split=split(frame_seq,total_frames,check_intervals,cap,mode='no_file')
+images_after_split=split.split(frame_seq,total_frames,check_intervals,cap,mode='no_file')
 
 
 
@@ -144,7 +79,7 @@ print(s3-s2)
 ######################THIRD_PHASE###################################
 
 
-compose_video(edited_images,video_name,fps,total_frames,check_intervals,mode='no_file')
+compose.compose_video(edited_images,video_name,fps,total_frames,check_intervals,mode='no_file')
 
 
 s4=time.time()
@@ -152,5 +87,6 @@ print("end of third phase")
 print(s4-s3)
 
 print("total ending",s4-s1)
+
 
 
