@@ -10,13 +10,6 @@ import split
 
 
 
-######################FIRST_PHASE###################################
-list_of_concerns=[['ΙΩΑ',0.6],['ΙΩΑΝΝΗΣ',0.6],['ΤΣΑΜΠΡΑΣ',0.6],['ΣΤΑΜΑΤΙΟΥ',0.75],['ΙΩΑΝΝΗΣΤΣΑΜΠΡΑΣ',0.6],["up1066584",0.5]] #choose keywords and sensitivity
-video_name = "directory/test.mp4" #choose input video location
-quality_factor=1
-file_mode='file'
-check_intervals=30 #fps
-
 
 def controller(list_of_concerns,video_name,quality_factor,file_mode,check_intervals):
   cap = cv2.VideoCapture(video_name)
@@ -36,4 +29,4 @@ def controller(list_of_concerns,video_name,quality_factor,file_mode,check_interv
   compose.compose_video(edited_images,video_name,fps,total_frames,check_intervals,mode=file_mode)
 
 
-controller(list_of_concerns,video_name,quality_factor,file_mode,check_intervals)
+#controller(list_of_concerns,video_name,quality_factor,file_mode,check_intervals)
