@@ -1,4 +1,3 @@
-from urllib import response
 import ocr_service
 import uvicorn
 from fastapi import File, UploadFile, FastAPI
