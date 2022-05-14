@@ -11,7 +11,7 @@ import split
 
 
 
-def controller(list_of_concerns,video_name,quality_factor,file_mode,check_intervals):
+def edit(list_of_concerns,video_name,quality_factor,file_mode,check_intervals):
   cap = cv2.VideoCapture(video_name)
   fps= int(cap.get(cv2.CAP_PROP_FPS))
   frame_seq=0
@@ -30,3 +30,4 @@ def controller(list_of_concerns,video_name,quality_factor,file_mode,check_interv
 
 
 #controller(list_of_concerns,video_name,quality_factor,file_mode,check_intervals)
+
