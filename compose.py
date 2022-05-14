@@ -30,3 +30,4 @@ def compose_video(edited_images, video_name, fps, total_frames, check_intervals,
 
     cv2.destroyAllWindows()
     videoWriter.release()
+
