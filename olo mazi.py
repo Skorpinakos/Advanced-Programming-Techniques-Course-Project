@@ -63,7 +63,7 @@ ratio=width/height
 res=int(original_res*quality_factor)
 path = "store_photos_after_split"
 
-edited_images=detect.detect_and_edit(list_of_concerns,original_res,images_after_split,ratio,path,res,language='ell',mode='file')
+edited_images=detect.detect_and_edit(list_of_concerns,original_res,images_after_split,ratio,path,res,language='ell',mode='no_file')
 
   
 #for i in range(0,len(frame_list)-1):                                         #<-it was about ram and ssd utilization
