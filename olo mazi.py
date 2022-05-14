@@ -155,8 +155,7 @@ print(s2-s1, frame_seq/check_intervals)
 
 ######################SECOND_PHASE###################################
 
-pytesseract.pytesseract.tesseract_cmd = 'tesseract_location/tesseract.exe'
-path = "store_photos_after_split"
+
 
 
 
@@ -167,8 +166,7 @@ original_res=height
 ratio=width/height
 res=int(original_res*quality_factor)
 
-
-edited_images=detect_and_edit(images_after_split,ratio,path,res,language='ell',mode='no_file')
+edited_images=detect_and_edit(images_after_split,ratio,res,language='ell',mode='no_file')
 
   
 #for i in range(0,len(frame_list)-1):                                         #<-it was about ram and ssd utilization
@@ -192,4 +190,6 @@ print("end of third phase")
 print(s4-s3)
 
 print("total ending",s4-s1)
+
+
 

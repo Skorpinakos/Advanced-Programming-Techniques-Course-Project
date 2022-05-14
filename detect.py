@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-import time
+
 import os
 import pytesseract
 from pytesseract import Output
@@ -12,8 +12,10 @@ def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
 
 
+path = "store_photos_after_split"
 
-def detect_and_edit(image_list,ratio,path,res,language='ell',mode='file'):
+def detect_and_edit(list_of_concerns,original_res,image_list,ratio,path,res,language='ell',mode='file'):
+  pytesseract.pytesseract.tesseract_cmd = 'tesseract_location/tesseract.exe'
   if mode!='file':
     return_list=[]
   else:
