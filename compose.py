@@ -25,7 +25,7 @@ def compose_video(edited_images, video_name, fps, total_frames, check_intervals,
     for i in range(0, int(total_frames/check_intervals)-1):
         for j in range(0, check_intervals):
             videoWriter.write(edited_images[i])
-    if mode == 'file' and os.path.isDir(inputDir):
+    if mode == 'file' and os.path.isdir(inputDir):
         shutil.rmtree(inputDir)
 
     cv2.destroyAllWindows()
