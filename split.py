@@ -10,7 +10,7 @@ from difflib import SequenceMatcher
 def split(frame_seq, total_frames, check_intervals, cap, mode='file'):
     images_after_split = []
     outDir = 'store_photos_after_split/'
-    if not os.path.isfile(outDir):
+    if not os.path.isdir(outDir):
         os.makedirs(outDir)
     while(True):
         if frame_seq < total_frames-1:
