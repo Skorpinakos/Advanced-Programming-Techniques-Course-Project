@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-
+import shutil
 import os
 import pytesseract
 from pytesseract import Output
@@ -14,11 +14,17 @@ def similar(a, b):
 
 path = "store_photos_after_split"
 
+
+
 def detect_and_edit(list_of_concerns,original_res,image_list,ratio,path,res,language='ell',mode='file'):
   pytesseract.pytesseract.tesseract_cmd = 'tesseract_location/tesseract.exe'
   if mode!='file':
     return_list=[]
   else:
+    is_dir = os.path.isdir('store_photos_out/') 
+    if is_dir==False:
+        os.makedirs('store_photos_out/')
+
     image_list=os.listdir(path)
   for image_path in image_list:
     if mode=='file':
@@ -51,8 +57,11 @@ def detect_and_edit(list_of_concerns,original_res,image_list,ratio,path,res,lang
         h=int(h*(original_res/res))
         cv2.rectangle(img_original, (x, y), (x + w, y + h), (0, 255, 0), -1)
     if mode=='file':
+        
       cv2.imwrite("store_photos_out/{}".format(image_path), img_original)
     else:
       return_list.append(img_original)
   if mode!='file':
     return return_list
+  else:
+      shutil.rmtree(path+'/')
