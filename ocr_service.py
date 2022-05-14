@@ -1,32 +1,44 @@
 import numpy as np
 import cv2
 import time
+import os
+import pytesseract
+from pytesseract import Output
+from difflib import SequenceMatcher
 
 
-import detect
-import compose 
-import split
+def split(frame_seq, total_frames, check_intervals, cap, mode='file'):
+    images_after_split = []
+    outDir = 'store_photos_after_split/'
+    if not os.path.isdir(outDir):
+        os.makedirs(outDir)
+    while(True):
+        if frame_seq < total_frames-1:
 
+            # The first argument of cap.set(), number 2 defines that parameter for setting the frame selection.
+            # Number 2 defines flag CV_CAP_PROP_POS_FRAMES which is a 0-based index of the frame to be decoded/captured next.
+            # The second argument defines the frame number in range 0.0-1.0
 
+            cap.set(1, frame_seq)
 
+            # Read the next frame from the video. If you set frame 749 above then the code will return the last frame.
+            ret, frame = cap.read()
+            if frame_seq == 0:
+                images_after_split.append(frame)
 
+            # Store this frame to an image
+            #
+            if mode != 'file':
+                images_after_split.append(frame)
+            else:
+                cv2.imwrite('store_photos_after_split/_frame_' +
+                            str(frame_seq)+'.jpg', frame)
 
-def controller(list_of_concerns,video_name,quality_factor,file_mode,check_intervals):
-  cap = cv2.VideoCapture(video_name)
-  fps= int(cap.get(cv2.CAP_PROP_FPS))
-  frame_seq=0
-  total_frames=cap.get(cv2.CAP_PROP_FRAME_COUNT)
-  time_length =total_frames/fps
-  images_after_split=split.split(frame_seq,total_frames,check_intervals,cap,mode=file_mode)
-  cap.release()
-  cv2.destroyAllWindows()
-  height,width,layers=images_after_split[0].shape
-  original_res=height
-  ratio=width/height
-  res=int(original_res*quality_factor)
-  path = "store_photos_after_split"
-  edited_images=detect.detect_and_edit(list_of_concerns,original_res,images_after_split,ratio,path,res,language='ell',mode=file_mode)
-  compose.compose_video(edited_images,video_name,fps,total_frames,check_intervals,mode=file_mode)
+            # frame_list.append(frame) #<-it was about ram and ssd utilization
+            # increase counter by one interval
+            frame_seq = check_intervals+frame_seq
+        else:
+            break
 
+    return images_after_split
 
-#controller(list_of_concerns,video_name,quality_factor,file_mode,check_intervals)

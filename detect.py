@@ -65,4 +65,3 @@ def detect_and_edit(list_of_concerns,original_res,image_list,ratio,path,res,lang
     return return_list
   else:
       shutil.rmtree(path+'/')
-
