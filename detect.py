@@ -12,7 +12,7 @@ def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
 
 
-path = "store_photos_after_split"
+
 
 
 
