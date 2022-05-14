@@ -28,7 +28,7 @@ def detect_and_edit(list_of_concerns,original_res,image_list,ratio,path,res,lang
     image_list=os.listdir(path)
   for image_path in image_list:
     if mode=='file':
-      input_path = "store_photos_after_split/"+image_path
+      input_path = path+'/'+image_path
       img_original = cv2.imread(input_path)
     else:
       img_original = image_path
