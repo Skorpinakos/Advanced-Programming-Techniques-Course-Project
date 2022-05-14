@@ -9,6 +9,9 @@ from difflib import SequenceMatcher
 
 def split(frame_seq, total_frames, check_intervals, cap, mode='file'):
     images_after_split = []
+    outDir = 'store_photos_after_split'
+    if not os.path.isfile(outDir):
+        os.makedirs(outDir)
     while(True):
         if frame_seq < total_frames-1:
 
@@ -28,11 +31,8 @@ def split(frame_seq, total_frames, check_intervals, cap, mode='file'):
             if mode != 'file':
                 images_after_split.append(frame)
             else:
-                path = 'store_photos_after_split/_frame_' + \
-                    str(frame_seq)+'.jpg', frame
-                if not os.path.isfile(path):
-                    os.makedirs(path)
-                cv2.imwrite(path, frame)
+                cv2.imwrite('store_photos_after_split/_frame_' +
+                            str(frame_seq)+'.jpg', frame)
 
             # frame_list.append(frame) #<-it was about ram and ssd utilization
             # increase counter by one interval
