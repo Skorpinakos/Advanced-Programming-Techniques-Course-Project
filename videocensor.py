@@ -27,12 +27,11 @@ class Censor():
         # with open('edited_video.mp4','wb') as file:
         # file.write(resp.content)
         # file.close()
-        to_return = Respond(resp)
         path_to_clear = self.api_controller_path.replace(
             'api_controller.py', '')+'store_output_video/'
         shutil.rmtree(path_to_clear)
 
-        return to_return
+        return Respond(resp)
 
 
 def initialize(location, storage_mode):
