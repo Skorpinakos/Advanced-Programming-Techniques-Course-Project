@@ -1,10 +1,5 @@
-import numpy as np
 import cv2
-import time
 import os
-import pytesseract
-from pytesseract import Output
-from difflib import SequenceMatcher
 
 
 def split(frame_seq, total_frames, check_intervals, cap, mode='file'):
