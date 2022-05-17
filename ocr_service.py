@@ -1,8 +1,4 @@
-import numpy as np
 import cv2
-import time
-
-
 import detect
 import compose
 import split
@@ -30,3 +26,4 @@ def edit(list_of_concerns, video_name, quality_factor, file_mode, check_interval
 
 
 # controller(list_of_concerns,video_name,quality_factor,file_mode,check_intervals)
+
