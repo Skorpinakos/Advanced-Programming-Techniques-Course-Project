@@ -13,6 +13,6 @@ A demonstration project for the course Advanced_Programming_Techniques_2022
    opencv-python
    numpy
    pytesseract
-   difflib
+   cdifflib
    requests
    python-multipart
