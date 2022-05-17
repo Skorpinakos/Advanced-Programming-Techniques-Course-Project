@@ -22,14 +22,16 @@ class Censor():
     def censor(self, file_path, keywords, options):
         url = 'http://127.0.0.1:8000/upload'
         file = {'file': open(file_path, 'rb')}
-        resp = requests.post(url=url, files=file)
+        options.update({'keywords': keywords})
+        print(options)
+        resp = requests.post(url=url, files=file, data=options)
         # print(resp.content)
         # with open('edited_video.mp4','wb') as file:
         # file.write(resp.content)
         # file.close()
-        path_to_clear = self.api_controller_path.replace(
-            'api_controller.py', '')+'store_output_video/'
-        shutil.rmtree(path_to_clear)
+        # path_to_clear = self.api_controller_path.replace(
+        #     'api_controller.py', '')+'store_output_video/'
+        # shutil.rmtree(path_to_clear)
 
         return Respond(resp)
 
