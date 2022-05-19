@@ -12,3 +12,4 @@ print(metadata)  # print return data
 with open('edited_video.mp4', 'wb') as file:
     file.write(result.video)  # save the returned video as file
 Censorer.kill()
+print('success')
