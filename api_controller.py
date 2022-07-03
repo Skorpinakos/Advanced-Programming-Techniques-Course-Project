@@ -1,9 +1,8 @@
 # API Server
 
-from ast import keyword
 import inspect
-from typing import List, Tuple, Type
-from fastapi import Depends, FastAPI, Form, Request, UploadFile, File
+from typing import Type
+from fastapi import Depends, FastAPI, Form, UploadFile, File
 import uvicorn
 from pydantic import BaseModel
 from pydantic.fields import ModelField
@@ -37,11 +36,6 @@ def as_form(cls: Type[BaseModel]):
     return cls
 
 
-class Keyword(BaseModel):
-    keyword: str
-    matching_level: float
-
-
 @as_form
 class Params(BaseModel):
     quality_factor: int
@@ -57,21 +51,21 @@ app = FastAPI()
 async def receive(file: UploadFile = File(...), form: Params = Depends(Params.as_form)):
     contents = await file.read()
     params2 = form.dict()
-    list_of_concerns_single=params2['keywords']
-  
-    quality_factor=params2['quality_factor']
-    file_mode=params2['file_mode']
-    check_intervals=params2['check_intervals']
-    list_of_concerns_double=[]
-    for concern in list_of_concerns_single:
-        list_of_concerns_double.append([concern,0.7])
+    list_of_concerns_single = params2['keywords']
 
+    quality_factor = params2['quality_factor']
+    file_mode = params2['file_mode']
+    check_intervals = params2['check_intervals']
+    list_of_concerns_double = []
+    for concern in list_of_concerns_single:
+        list_of_concerns_double.append([concern, 0.7])
 
     with open('video_under_procces.mp4', 'wb') as f:
         f.write(contents)
         f.close()
-    
-    ocr_service.edit(list_of_concerns_double, 'video_under_procces.mp4',quality_factor, file_mode, check_intervals)
+
+    ocr_service.edit(list_of_concerns_double, 'video_under_procces.mp4',
+                     quality_factor, file_mode, check_intervals)
     return FileResponse('store_output_video/video_under_procces.mp4.mp4',  media_type="video/mp4")
 
 if __name__ == '__main__':
