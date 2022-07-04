@@ -43,10 +43,6 @@ class Params(BaseModel):
     check_intervals: int
     keywords: list[str]
 
-class Params2(BaseModel):
-    quality_factor: int
-    keywords: list[str]
-
 
 app = FastAPI()
 
@@ -62,7 +58,7 @@ async def receive(file: UploadFile = File(...), form: Params = Depends(Params.as
     check_intervals = params2['check_intervals']
     list_of_concerns_double = []
     for concern in list_of_concerns_single:
-        list_of_concerns_double.append([concern, 0.6])
+        list_of_concerns_double.append([concern, 0.7])
 
     with open('video_under_procces.mp4', 'wb') as f:
         f.write(contents)
@@ -71,30 +67,6 @@ async def receive(file: UploadFile = File(...), form: Params = Depends(Params.as
     ocr_service.edit(list_of_concerns_double, 'video_under_procces.mp4',
                      quality_factor, file_mode, check_intervals)
     return FileResponse('store_output_video/video_under_procces.mp4.mp4',  media_type="video/mp4")
-
-
-@ app.post("/receive_photo/", response_model=Params)
-async def receive(file: UploadFile = File(...), form: Params = Depends(Params.as_form)):
-    contents = await file.read()
-    params2 = form.dict()
-    list_of_concerns_single = params2['keywords']
-
-    quality_factor = params2['quality_factor']
-    list_of_concerns_double = []
-    for concern in list_of_concerns_single:
-        list_of_concerns_double.append([concern, 0.6])
-
-    with open('photo_under_procces.png', 'wb') as f:
-        f.write(contents)
-        f.close()
-
-    ocr_service.edit_photo(list_of_concerns_double, 'photo_under_procces.png',
-                     quality_factor)
-    return FileResponse('store_output_photo/photo_under_procces.png',  media_type="photo/png")
-
-if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=8002)
-
 
 if __name__ == '__main__':
     uvicorn.run(app, host='0.0.0.0', port=8002)
