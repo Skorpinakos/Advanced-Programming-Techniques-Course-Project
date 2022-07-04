@@ -41,6 +41,31 @@ class Censor():
 
         return Respond(resp)
 
+    def censor_photos(self,user_path,keywords,options):
+        if os.path.isdir(user_path):
+            for image in os.listdir(user_path):
+                results=[]
+                if image.endswith((".png",".PNG")):
+                            url = 'http://127.0.0.1:8002/receive_photo/'
+                            file = {'file': open(image, 'rb')}
+                            #options.update({'keywords': keywords})
+                            #print(options)
+                            params=options
+                            params['keywords']=keywords
+                            resp = requests.post(url,files=file, data=params)
+                            results.append(Respond(resp))
+            return results
+        else:
+            url = 'http://127.0.0.1:8002/receive_photo/'
+            file = {'file': open(image, 'rb')}
+            #options.update({'keywords': keywords})
+            #print(options)
+            params=options
+            params['keywords']=keywords
+            resp = requests.post(url,files=file, data=params)
+            return Respond(resp)
+
+
 
 def initialize(location, storage_mode):
     My_censor = Censor(location, storage_mode)
@@ -51,6 +76,4 @@ def initialize(location, storage_mode):
    # 'quality_factor': 1, 'file_mode': 'no_file', 'check_intervals': 30,
   #  'keywords': ['ΙΩΆΝΝΗΣ', 'sdfsfd']
 #}
-
-
 
