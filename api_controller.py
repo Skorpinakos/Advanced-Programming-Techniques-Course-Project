@@ -43,9 +43,6 @@ class Params(BaseModel):
     check_intervals: int
     keywords: list[str]
 
-class Params2(BaseModel):
-    quality_factor: int
-    keywords: list[str]
 
 
 app = FastAPI()
@@ -93,8 +90,5 @@ async def receive(file: UploadFile = File(...), form: Params = Depends(Params.as
     return FileResponse('store_output_photo/photo_under_procces.png',  media_type="photo/png")
 
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=8002)
+    uvicorn.run(app, host='0.0.0.0', port=8005)
 
-
-if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=8002)
