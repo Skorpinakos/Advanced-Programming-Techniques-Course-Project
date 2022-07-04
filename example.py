@@ -6,10 +6,18 @@ location = 'api_controller.py'
 Censorer = videocensor.initialize(location, storage_mode='RAM')
 # use the tool on a local video
 result = Censorer.censor('directory/test.mp4',
-                         ['ΙΩΑΝΝΗΣ', 'ΤΣΑΜΠΡΑΣ', 'ΙΩΑ','ΙΩΑ..'], {'quality_factor': 1, 'file_mode': 'no_file', 'check_intervals': 30})
+                         ['ΙΩΑΝΝΗΣ', 'ΤΣΑΜΠΡΑΣ','ΙΩΑ','ΙΩΑ..'], {'quality_factor': 1, 'file_mode': 'no_file', 'check_intervals': 30})
 metadata = result.info  # get the metadata
 print(metadata)  # print return data
 with open('edited_video.mp4', 'wb') as file:
-    file.write(result.video)  # save the returned video as file
+    file.write(result.media)  # save the returned video as file
+
+
+result_photo = Censorer.censor_photos('directory/test_photo.png',['ΙΩΑΝΝΗΣ', 'ΤΣΑΜΠΡΑΣ','ΙΩΑ','ΙΩΑ..'], {'quality_factor': 1})
+print(result_photo.info)
+with open('edited_photo.png', 'wb') as file:
+    file.write(result_photo.media)  # save the returned image as file
+
+
 Censorer.kill()
 print('success')
