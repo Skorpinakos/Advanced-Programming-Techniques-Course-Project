@@ -1,32 +1,37 @@
+FROM ubuntu:22.04
+RUN apt-get update \
+    && apt-get install tesseract-ocr -y \
+    python3 \
+    #python-setuptools \
+    python3-pip \
+    && apt-get clean \
+    && apt-get autoremove
+
 # Python version
-FROM python:3
+FROM python:3.10
 
 # Scripts
-ADD api_controller.py /
-ADD ocrservice.py /
-ADD compose.py /
-ADD detect.py /
-ADD split.py /
-ADD videocensor.py /
+ADD api_controller.py .
+ADD ocr_service.py .
+ADD compose.py .
+ADD detect.py .
+ADD split.py .
+ADD videocensor.py .
 
 # Dependencies
-RUN pip install inspect
 RUN pip install typing
 RUN pip install fastapi
 RUN pip install uvicorn
 RUN pip install pydantic
-RUN pip install cv2
-RUN pip install os
-RUN pip install shutil
-RUN pip install subprocess
+RUN pip install numpy
+RUN pip install opencv-python
 RUN pip install requests
 RUN pip install numpy
 RUN pip install pytesseract
-RUN pip install difflib
 RUN pip install detect
 RUN pip install compose
 RUN pip install split
 
-CMD ["python","start.py","(api-url) ","(api-key)","(file-path)"]
+ENTRYPOINT ["python","./main.py"]
 
 
