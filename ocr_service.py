@@ -27,9 +27,10 @@ def edit(list_of_concerns, video_name, quality_factor, file_mode, check_interval
 
 def edit_photo(list_of_concerns, photo_name, quality_factor):
     image=cv2.imread(photo_name)
+
+    height, width, layers = image.shape
     original_res = height
     ratio = width/height
-    height, width, layers = image.shape
     res = int(original_res*quality_factor)
     path="store_photos_after_split"
     result=detect.detect_and_edit(list_of_concerns, original_res, [image], ratio, path, res, language='ell', mode='ram')
@@ -42,4 +43,3 @@ def edit_photo(list_of_concerns, photo_name, quality_factor):
 
 
 # controller(list_of_concerns,video_name,quality_factor,file_mode,check_intervals)
-
