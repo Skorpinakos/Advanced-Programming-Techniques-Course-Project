@@ -17,6 +17,7 @@ ADD compose.py .
 ADD detect.py .
 ADD split.py .
 ADD videocensor.py .
+ADD main.py .
 
 # Dependencies
 RUN pip install typing
