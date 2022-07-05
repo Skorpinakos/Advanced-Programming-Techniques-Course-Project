@@ -7,7 +7,7 @@ from pytesseract import Output
 from difflib import SequenceMatcher
 
 
-#################################################################### DEF #######################################################
+
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
 

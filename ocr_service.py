@@ -42,4 +42,4 @@ def edit_photo(list_of_concerns, photo_name, quality_factor):
         cv2.imwrite('store_output_photo/photo_under_procces.png', image)
 
 
-# controller(list_of_concerns,video_name,quality_factor,file_mode,check_intervals)
+

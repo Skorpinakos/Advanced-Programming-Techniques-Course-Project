@@ -59,7 +59,7 @@ async def receive(file: UploadFile = File(...), form: Params = Depends(Params.as
     check_intervals = params2['check_intervals']
     list_of_concerns_double = []
     for concern in list_of_concerns_single:
-        list_of_concerns_double.append([concern, 0.6])
+        list_of_concerns_double.append([concern, 0.4])
 
     with open('video_under_procces.mp4', 'wb') as f:
         f.write(contents)
@@ -79,7 +79,7 @@ async def receive(file: UploadFile = File(...), form: Params = Depends(Params.as
     quality_factor = params2['quality_factor']
     list_of_concerns_double = []
     for concern in list_of_concerns_single:
-        list_of_concerns_double.append([concern, 0.6])
+        list_of_concerns_double.append([concern, 0.45])
 
     with open('photo_under_procces.png', 'wb') as f:
         f.write(contents)

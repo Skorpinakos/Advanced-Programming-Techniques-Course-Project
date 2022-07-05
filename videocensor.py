@@ -58,6 +58,9 @@ class Censor():
                             resp = requests.post(url,files=file, data=params)
                             results.append(Photo(Respond(resp),image))
                             
+            path_to_clear = self.api_controller_path.replace('api_controller.py', '')+'store_output_photo/'
+            shutil.rmtree(path_to_clear)
+            os.remove(self.api_controller_path.replace('api_controller.py', '')+'photo_under_procces.png')                
             return results
         else:
             
@@ -75,6 +78,7 @@ class Censor():
             return Photo(Respond(resp),user_path.split('/')[-1])
 
 
+        
 
 def initialize(location, storage_mode):
     My_censor = Censor(location, storage_mode)
