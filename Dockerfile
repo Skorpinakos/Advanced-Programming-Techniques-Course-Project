@@ -1,38 +1,23 @@
-FROM ubuntu:22.04
-RUN apt-get update \
-    && apt-get install tesseract-ocr -y \
-    python3 \
-    #python-setuptools \
-    python3-pip \
-    && apt-get clean \
-    && apt-get autoremove
+# Python 3.10 on debian bullseye
+FROM python:3.10-bullseye
 
-# Python version
-FROM python:3.10
+# Install the tesseract-ocr package
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y tesseract-ocr tesseract-ocr-ell \
+    && apt-get clean \
+    && apt-get autoremove \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 
 # Scripts
-ADD api_controller.py .
-ADD ocr_service.py .
-ADD compose.py .
-ADD detect.py .
-ADD split.py .
-ADD videocensor.py .
-ADD main.py .
+COPY . .
+CMD ["python3", "./api_controller.py"]
 
-# Dependencies
-RUN pip install typing
-RUN pip install fastapi
-RUN pip install uvicorn
-RUN pip install pydantic
-RUN pip install numpy
-RUN pip install opencv-python
-RUN pip install requests
-RUN pip install numpy
-RUN pip install pytesseract
-RUN pip install detect
-RUN pip install compose
-RUN pip install split
-
-ENTRYPOINT ["python","./main.py"]
-
-
+# Server runs on port 8002
+EXPOSE 8002
