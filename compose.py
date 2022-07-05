@@ -2,7 +2,7 @@ import cv2
 import os
 import shutil
 
-#      image or image_path list  /filename   /out_fps /total scanned images /period of checking frames/ store mode
+# attributes     image or image_path list  /filename   /out_fps /total scanned images /period of checking frames/ store mode
 def compose_video(edited_images, video_name, fps, total_frames, check_intervals, mode='file'):
 
     inputDir = "store_photos_out/"
