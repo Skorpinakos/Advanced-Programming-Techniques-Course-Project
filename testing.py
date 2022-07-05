@@ -1,12 +1,11 @@
 #('directory/test_photo.png',['ΙΩΑΝΝΗΣ', 'ΤΣΑΜΠΡΑΣ','ΙΩΑ','ΙΩΑ..'], {'quality_factor': 1})
 import requests
-
 url = 'http://127.0.0.1:8005/receive_photo/'
 file = {'file': open('directory/test_photo.png', 'rb')}
 #options.update({'keywords': keywords})
 # print(options)
 params = {'quality_factor': 1, 'file_mode': 'no_file', 'check_intervals': 1}
-keywords = ['ΙΩΑΝΝΗΣ', 'ΤΣΑΜΠΡΑΣ', 'ΙΩΑ', 'ΙΩΑ..']
+keywords = ['ΙΩΑΝΝΗΣ', 'ΤΣΑΜΠΡΑΣ']
 params['keywords'] = keywords
 resp = requests.post(url, files=file, data=params)
 result = resp
