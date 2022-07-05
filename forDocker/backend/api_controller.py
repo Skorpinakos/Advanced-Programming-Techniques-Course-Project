@@ -78,7 +78,7 @@ async def receive(file: UploadFile = File(...), form: Params = Depends(Params.as
     quality_factor = params['quality_factor']
     list_of_concerns_double = []
     for concern in list_of_concerns_single:
-        list_of_concerns_double.append([concern, 0.4])
+        list_of_concerns_double.append([concern, 0.6])
 
     with open('photo_under_procces.png', 'wb') as f:
         f.write(contents)

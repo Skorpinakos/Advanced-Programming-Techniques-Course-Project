@@ -26,10 +26,19 @@ def main(filepath, keywords, mediatype, quality_factor=4.5, file_mode='RAM', che
         # use the tool on a photo
         # returned Photo object has .info(metadata) .media(the binary file for the photo) and .name(the original file name)
         result_photo = Censorer.censor_photos(
-            filepath, keywords, {'quality_factor': quality_factor})
+            filepath, keywords, {'quality_factor': quality_factor - 1})
         print(result_photo.info)
         with open('single_edited_photo_{}.png'.format(result_photo.name), 'wb') as file:
             file.write(result_photo.media)  # save the returned image as file
+
+    elif(mediatype == 'directory'):
+        # use the tool on multiple photos
+        result_photos = Censorer.censor_photos(filepath, keywords, {
+            'quality_factor': quality_factor - 1})  # the return object is a list oh Photo objects
+        for i in result_photos:
+            print(i.info)
+            with open('multiple_edited_photo_{}.png'.format(i.name), 'wb') as file:
+                file.write(i.media)  # save the returned image as file
 
 
 if __name__ == "__main__":
