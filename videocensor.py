@@ -78,6 +78,7 @@ class Censor():
             return Photo(Respond(resp),user_path.split('/')[-1])
 
 
+        
 
 def initialize(location, storage_mode):
     My_censor = Censor(location, storage_mode)
