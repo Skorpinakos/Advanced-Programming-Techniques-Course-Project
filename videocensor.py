@@ -2,6 +2,7 @@ import requests
 import subprocess
 import shutil
 import os
+import time
 
 
 class Respond():
@@ -23,6 +24,7 @@ class Censor():
         self.api_controller_path = api_controller_path
         self.process_to_execute = subprocess.Popen(
             ["python", api_controller_path], creationflags=subprocess.CREATE_NO_WINDOW)
+        time.sleep(5)
         # self.process_to_execute.wait()
 
     def terminate(self):
