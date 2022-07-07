@@ -20,7 +20,7 @@ def edit(list_of_concerns, video_name, quality_factor, file_mode, check_interval
     ratio = width/height
     res = int(original_res*quality_factor)
     path = "store_photos_after_split"
-    edited_images = detect.detect_and_edit(
+    edited_images,findings = detect.detect_and_edit(
         list_of_concerns, original_res, images_after_split, ratio, path, res, language='ell', mode=file_mode)
     compose.compose_video(edited_images, video_name, fps,
                           total_frames, check_intervals, mode=file_mode)
@@ -33,13 +33,15 @@ def edit_photo(list_of_concerns, photo_name, quality_factor):
     ratio = width/height
     res = int(original_res*quality_factor)
     path="store_photos_after_split"
-    result=detect.detect_and_edit(list_of_concerns, original_res, [image], ratio, path, res, language='ell', mode='ram')
+    result,findings=detect.detect_and_edit(list_of_concerns, original_res, [image], ratio, path, res, language='ell', mode='ram')
     image=result[0]
     if os.path.isdir('store_output_photo/') :
         cv2.imwrite('store_output_photo/photo_under_procces.png', image)
     else:
         os.mkdir('store_output_photo/')
         cv2.imwrite('store_output_photo/photo_under_procces.png', image)
+
+
 
 
 
