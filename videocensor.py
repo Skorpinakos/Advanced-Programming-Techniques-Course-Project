@@ -25,10 +25,6 @@ class Censor():
         self.process_to_execute = subprocess.Popen(
             ["python", api_controller_path], creationflags=subprocess.CREATE_NO_WINDOW)
         time.sleep(5)
-        # self.process_to_execute.wait()
-
-    def terminate(self):
-        pass
 
     def kill(self):
         self.process_to_execute.kill()
