@@ -2,7 +2,7 @@ import cv2
 import os
 import shutil
 
-# attributes     image or image_path list  /filename   /out_fps /total scanned images /period of checking frames/ store mode
+#      image or image_path list  /filename   /out_fps /total scanned images /period of checking frames/ store mode
 def compose_video(edited_images, video_name, fps, total_frames, check_intervals, mode='file'):
 
     inputDir = "store_photos_out/"
@@ -19,8 +19,9 @@ def compose_video(edited_images, video_name, fps, total_frames, check_intervals,
     is_dir = os.path.isdir('store_output_video/')
     if is_dir == False:
         os.makedirs('store_output_video/')
+    fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
     videoWriter = cv2.VideoWriter(
-        'store_output_video/{}.mp4'.format(video_name.split("/")[-1]), -1, fps, (width, height))
+        'store_output_video/{}.mp4'.format(video_name.split("/")[-1]),fourcc,  fps, (width, height))
 
     for i in range(0, int(total_frames/check_intervals)-1):
         for j in range(0, check_intervals):
@@ -30,5 +31,7 @@ def compose_video(edited_images, video_name, fps, total_frames, check_intervals,
 
     cv2.destroyAllWindows()
     videoWriter.release()
+
+
 
 
