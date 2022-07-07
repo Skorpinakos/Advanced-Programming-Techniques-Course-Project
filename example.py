@@ -18,7 +18,7 @@ with open('edited_video.mp4', 'wb') as file:
 # use the tool on a photo
 # returned Photo object has .info(metadata) .media(the binary file for the photo) and .name(the original file name)
 result_photo = Censorer.censor_photos(
-    'directory/test_photo.png', ['ΙΩΑΝΝΗΣ', 'ΤΣΑΜΠΡΑΣ', 'ΙΩΑ', 'ΙΩΑ..'], {'quality_factor': 1})
+    'directory/test_photo_a.png', ['ΙΩΑΝΝΗΣ', 'ΤΣΑΜΠΡΑΣ', 'ΙΩΑ', 'ΙΩΑ..'], {'quality_factor': 1})
 print(result_photo.info)
 with open('single_edited_photo_{}.png'.format(result_photo.name), 'wb') as file:
     file.write(result_photo.media)  # save the returned image as file
