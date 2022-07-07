@@ -7,7 +7,7 @@ from pytesseract import Output
 from difflib import SequenceMatcher
 
 
-
+#################################################################### DEF #######################################################
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
 
@@ -35,11 +35,13 @@ def detect_and_edit(list_of_concerns, original_res, image_list, ratio, path, res
             img, lang=language, output_type=Output.DICT)
         n_boxes = len(d['level'])
 
+        findings={}
         for i in range(n_boxes):
             string_to_check = d['text'][i].upper()
             list_to_check = string_to_check.split(" ")
             condition = 0
             for k in list_to_check:
+                findings[k]='found'
                 for j in list_of_concerns:
 
                     if similar(k, j[0]) >= j[1]:
@@ -61,7 +63,8 @@ def detect_and_edit(list_of_concerns, original_res, image_list, ratio, path, res
         else:
             return_list.append(img_original)
     if mode != 'file':
-        return return_list
+        return [return_list,findings]
     else:
         
         shutil.rmtree(path+'/')
+
